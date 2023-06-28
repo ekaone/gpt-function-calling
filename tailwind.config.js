@@ -12,14 +12,8 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      fontFamily: {
-        sansSerif: "sans-serif",
-      },
-      backgroundColor: {
-        darkOffset: "#202025",
-      },
-      boxShadow: {
-        lg: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+      backgroundImage: {
+        dot: "url('/dots.svg')",
       },
     },
   },

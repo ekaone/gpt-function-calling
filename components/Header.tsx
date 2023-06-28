@@ -1,45 +1,12 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
-import { SunIcon, MoonIcon, StarIcon } from "@heroicons/react/24/solid";
+import { StarIcon } from "@heroicons/react/24/solid";
 
 const Header = () => {
-  const { systemTheme, theme, setTheme } = useTheme();
-
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const renderThemeChanger = () => {
-    if (!mounted) return null;
-    const currentTheme = theme === "system" ? systemTheme : theme;
-
-    if (currentTheme === "dark") {
-      return (
-        <SunIcon
-          className="w-6 h-6 text-yellow-500 "
-          role="button"
-          onClick={() => setTheme("light")}
-        />
-      );
-    } else {
-      return (
-        <MoonIcon
-          className="w-6 h-6 text-gray-900 "
-          role="button"
-          onClick={() => setTheme("dark")}
-        />
-      );
-    }
-  };
-
   return (
-    <header className=" flex w-full p-5 py-3 justify-between text-sm text-gray-800 border-b border-zinc-200 dark:border-zinc-800">
+    <header className="flex w-full p-5 py-3 justify-between text-sm text-gray-800 border-b border-zinc-200 dark:border-zinc-800">
       {/*left section*/}
-      <div className="flex space-x-4 items-center">{renderThemeChanger()}</div>
+      <div className="flex space-x-4 items-center font-bold font-sansSerif text-transparent bg-clip-text bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
+        GPT Function Calling
+      </div>
 
       {/*right section*/}
       <div className="flex space-x-4 items-center select-none">
@@ -50,11 +17,7 @@ const Header = () => {
             rel="noreferrer"
             className="flex items-center justify-center gap-1"
           >
-            <span>Star</span>{" "}
-            <StarIcon
-              className="w-5 h-5 text-yellow-400 "
-              onClick={() => setTheme("light")}
-            />
+            <span>Star</span> <StarIcon className="w-5 h-5 text-yellow-400 " />
             <span>on GitHub</span>
           </a>
         </span>
