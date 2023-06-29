@@ -3,6 +3,10 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 
+// components
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -17,7 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-dot">{children}</body>
+      <body className="bg-dot flex flex-col items-center m-0">
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
