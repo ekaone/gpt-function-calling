@@ -11,6 +11,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Loading from "@/components/Loading";
 import Welcome from "@/components/Welcome";
+import { Type } from "typescript";
 
 const spaceGrotesk = Space_Grotesk({
   weight: "700",
@@ -18,11 +19,30 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
+const initialMessages = [
+  { role: "system", content: "You are a helpful assistant." },
+  { role: "user", content: "Who won the world series in 2020?" },
+  {
+    role: "assistant",
+    content: "The Los Angeles Dodgers won the World Series in 2020.",
+  },
+  { role: "user", content: "Where was it played?" },
+];
+
 export default function Home() {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const { messages, input, setInput, handleSubmit, isLoading } = useChat({
+  const {
+    messages,
+    input,
+    setInput,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+  } = useChat({
+    //@ts-ignore
+    initialMessages,
     onResponse: (response) => {
       if (response.status === 401) {
         console.log("Unauthorized");
@@ -37,11 +57,6 @@ export default function Home() {
   });
 
   const disabled = isLoading || !input;
-
-  const [loading, setLoading] = useState(false);
-  const [additionalFeature, setAdditionalFeature] = useState(false);
-  const [generatedTitles, setGeneratedTitles] = useState("");
-  const [text, setText] = useState("");
 
   return (
     <>

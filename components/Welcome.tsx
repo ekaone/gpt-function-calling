@@ -1,12 +1,8 @@
 import React from "react";
+import Link from "next/link";
 
-const examples = [
-  "Chat Hacker News.",
-  "Get Weather.",
-  "Music Recomendation",
-  "Ideas for a new startup",
-  "Get a list startups",
-];
+// components
+import { features } from "../constants/data";
 
 function Welcome() {
   return (
@@ -19,7 +15,7 @@ function Welcome() {
           <p className="text-gray-500">
             This is an{" "}
             <a
-              href="https://github.com/steven-tey/chathn"
+              href="https://github.com/ekaone/gpt-function-calling"
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium underline underline-offset-4 transition-colors hover:text-black"
@@ -57,13 +53,15 @@ function Welcome() {
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 border-t border-gray-200 bg-gray-50 p-7 sm:p-10">
-          {examples.map((example, i) => (
-            <div
-              key={i}
-              className="rounded-md border border-gray-200 bg-white px-5 py-3 text-left text-sm text-gray-500 transition-all duration-75 hover:border-black hover:text-gray-700 active:bg-gray-50"
-            >
-              {example}
-            </div>
+          {features.map((feature, i) => (
+            <Link href={feature.url} key={feature.id}>
+              <button
+                key={i}
+                className="rounded-md border w-full border-gray-200 bg-white px-5 py-3 text-left text-sm text-gray-500 transition-all duration-75 hover:border-black hover:text-gray-700 active:bg-gray-50"
+              >
+                {feature.name}
+              </button>
+            </Link>
           ))}
         </div>
       </div>
