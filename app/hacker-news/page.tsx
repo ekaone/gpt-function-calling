@@ -17,6 +17,13 @@ import Hero from "@/components/Hero";
 export default function HackerNews() {
   const [loading, setLoading] = useState(false);
 
+  const responseRef = useRef<null | HTMLDivElement>(null);
+  const scrollToResponseSection = () => {
+    if (responseRef.current !== null) {
+      responseRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const { messages, handleInputChange, handleSubmit } = useChat({
     onResponse: (response) => {
       if (response.status === 401) {
@@ -29,6 +36,10 @@ export default function HackerNews() {
     onError: (error) => {
       console.log(error);
     },
+    onFinish: () => {
+      scrollToResponseSection();
+    },
+    api: "/api/hacker-news",
   });
 
   return (
@@ -47,6 +58,7 @@ export default function HackerNews() {
             >
               <div className="flex w-full max-w-screen-md items-start space-x-4 px-5 sm:px-0">
                 <div
+                  ref={responseRef}
                   key={m.id}
                   className={clsx(
                     "p-1.5 text-white",
@@ -56,7 +68,7 @@ export default function HackerNews() {
                   {m.role === "user" ? "User " : "AI: "}
                 </div>
                 <ReactMarkdown
-                  className="prose mt-1 w-full break-words prose-p:leading-relaxed"
+                  className="prose mt-1 mb-6 w-full break-words prose-p:leading-relaxed"
                   remarkPlugins={[remarkGfm]}
                   components={{
                     // open links in new tab
